@@ -17,7 +17,9 @@ class Database:
                 break
 
             entry = {"date": datetime.now(), "text": text}
-            self.data.insert_one(entry)
+            result = self.data.insert_one(entry)
+
+            print(f"Inserted document with ObjectID: {result.inserted_id}")
 
 
 if __name__ == "__main__":
