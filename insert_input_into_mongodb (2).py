@@ -5,10 +5,10 @@ from pymongo import MongoClient
 # Create a new MongoClient instance.
 client = MongoClient()
 
-# Connect to the "my_database" database.
+# Connect to the "l" database.
 db = client["l"]
 
-# Use the "my_collection" collection.
+# Use the "l" collection.
 collection = db["l"]
 
 while True:
