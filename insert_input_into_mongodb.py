@@ -16,6 +16,10 @@ class Database:
                 print("Bye!")
                 break
 
+            if not text:
+                print("Write something...")
+                continue
+
             entry = {"date": datetime.now(), "text": text}
             self.data.insert_one(entry)
 
