@@ -152,3 +152,10 @@ cython_debug/
 .idea/
 .fleet/
 .vscode/
+
+input.txt
+output.txt
+file1.txt
+file2.txt
+matching_lines.txt
+non_matching_lines.txt
