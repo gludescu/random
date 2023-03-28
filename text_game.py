@@ -1,3 +1,33 @@
+"""
+This script is a simple text-based adventure game called "Treasure Hunt". The goal of the game is to find the hidden treasure by navigating through various locations. The treasure and locations are randomly generated from a predefined list.
+
+Usage:
+
+1. Run the script to start the game.
+2. Follow the on-screen prompts to navigate through the locations using the commands: N (North), S (South), E (East), or W (West).
+3. The game will continue until you find the hidden treasure in one of the locations.
+
+How the game works:
+
+The game begins with an introduction message explaining the objective and controls.
+The treasure is hidden in one of the locations, except for the starting location, the 'Forest'.
+The player starts in the 'Forest' and can navigate through different locations using the commands: N, S, E, or W.
+The player's move will randomly take them to a new location.
+The game continues until the player reaches the location where the treasure is hidden.
+
+Example:
+Welcome to the Treasure Hunt game!
+...
+You are currently in the Forest.
+Enter your move (N, S, E, W): N
+You've reached a new location, but the treasure is not here. Keep searching!
+
+You are currently in the Dune.
+Enter your move (N, S, E, W): E
+...
+Congratulations! You've found the treasure in the Sunken Temple!
+"""
+
 import random
 
 def print_intro():
