@@ -1,2 +1,2 @@
-# urban-octo-sniffle
- Random Python scripts.
+# random-python-scripts
+Random Python scripts.
