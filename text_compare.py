@@ -20,6 +20,7 @@ The if __name__ == '__main__': block sets the names of the input files and the o
 Note: This script assumes that each line in the input files is unique. If there are duplicate lines within a file, they will be treated as a single entry when creating the sets.
 """
 
+
 def compare_files(file1, file2, output_match, output_no_match):
     with open(file1, 'r') as f1, open(file2, 'r') as f2:
         set1 = set(line.strip() for line in f1)

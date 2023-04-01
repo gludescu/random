@@ -24,6 +24,7 @@ Output file content:
     orange
 """
 
+
 def sort_and_remove_duplicates(input_file, output_file):
     with open(input_file, 'r') as f:
         lines = f.readlines()
@@ -34,6 +35,7 @@ def sort_and_remove_duplicates(input_file, output_file):
     # Write the sorted unique lines to the output file
     with open(output_file, 'w') as f:
         f.writelines(sorted_unique_lines)
+
 
 if __name__ == "__main__":
     input_file = 'input.txt'  # Replace with the path to your input file
