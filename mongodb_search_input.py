@@ -11,11 +11,13 @@ Usage:
 
 How the script works:
 
-The script defines a MongoDB class that initializes a MongoClient instance using the provided host and port.
-The search() method of the class takes a database name, collection name, and search word as input, and searches the collection for documents containing the search word (case-insensitive) in the 'text' field.
-The script then creates an instance of the MongoDB class, prompting the user to input a search word.
-The script performs the search in the specified database and collection, and prints the documents containing the search word.
+- The script defines a MongoDB class that initializes a MongoClient instance using the provided host and port.
+- The search() method of the class takes a database name, collection name, and search word as input, and searches the collection for documents containing the search word (case-insensitive) in the 'text' field.
+- The script then creates an instance of the MongoDB class, prompting the user to input a search word.
+- The script performs the search in the specified database and collection, and prints the documents containing the search word.
+
 Example:
+
 What to search? Apple
 {'_id': ObjectId('1234567890abcdef12345678'), 'text': 'Apple is a famous tech company.'}
 {'_id': ObjectId('1234567890abcdef12345679'), 'text': 'An apple a day keeps the doctor away.'}
