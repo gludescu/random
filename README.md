@@ -1,2 +1,2 @@
 # what dis?
-what the repository name says
+random python scripts
