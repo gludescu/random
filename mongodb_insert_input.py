@@ -1,51 +1,67 @@
 """
-This script demonstrates how to connect to a MongoDB database and insert documents into a collection using the pymongo library. The script establishes a connection with a MongoDB instance, takes input from the user, and inserts the data into the specified collection.
+This Python script allows you to insert multiple documents into a MongoDB localhost database. Each document will contain user input as 'text' and the current date and time as 'timestamp'. The script uses a loop to continuously prompt the user for input until they choose to exit.
 
-Usage:
+To use the script:
 
-Ensure that you have MongoDB installed and running on your machine, and the pymongo library installed.
-Replace 'l' in the __init__ method of the Database class with your target database and collection names, if different.
-Run the script.
-Enter text for the entry when prompted. To quit, type 'q' and press Enter.
-How the script works:
+1. Ensure you have the pymongo library installed. If not, install it using the following command:
+   pip install pymongo
 
-The script defines a Database class that initializes a MongoClient instance, connects to a database, and selects a collection.
-The insert_data() method of the class takes text input from the user and inserts it into the collection as a new document with a 'date' field containing the current timestamp and a 'text' field containing the user-provided text.
-The script creates an instance of the Database class and calls the insert_data() method to start taking user input and inserting it into the collection.
-Example:
-Entry: This is a sample entry.
-Entry: Another entry for the collection.
-Entry: q
-Bye!
+2. Replace 'your_database_name' and 'your_collection_name' with the appropriate names for your MongoDB database and collection.
+
+3. Run the script. It will prompt you for input. Enter the text you want to store in the 'text' field.
+
+4. Press Enter to insert the document and continue entering more documents.
+
+5. To exit the loop and stop inserting documents, type 'e' and press Enter. The script will print a message indicating that all documents have been inserted successfully.
+
+6. The inserted documents will have the following structure:
+   {
+       "text": <your_input>,
+       "timestamp": <current_date_and_time>
+   }
+
+7. To insert more documents, simply run the script again and follow the prompts.
 """
 
 
-import pymongo
+from pymongo import MongoClient
 from datetime import datetime
 
 
-class Database:
-    def __init__(self):
-        self.client = pymongo.MongoClient()
-        self.db = self.client.l
-        self.data = self.db.l
-
-    def insert_data(self):
-        while True:
-            text = input("Entry: ")
-
-            if text == "q":
-                print("Bye!")
-                break
-
-            if not text:
-                print("Write something...")
-                continue
-
-            entry = {"date": datetime.now(), "text": text}
-            self.data.insert_one(entry)
+def connect_to_mongodb(database_name, collection_name):
+    client = MongoClient('mongodb://localhost:27017/')
+    db = client[database_name]
+    collection = db[collection_name]
+    return client, collection
 
 
-if __name__ == "__main__":
-    db = Database()
-    db.insert_data()
+def create_document(input_data):
+    doc = {
+        'text': input_data,
+        'timestamp': datetime.utcnow()
+    }
+    return doc
+
+
+def insert_documents(collection):
+    while True:
+        input_data = input("Enter the text, or type 'e' to exit:\n")
+        if input_data.lower() == 'e':
+            break
+
+        doc = create_document(input_data)
+        collection.insert_one(doc)
+    print("All documents inserted successfully.")
+
+
+def main():
+    database_name = 'l'
+    collection_name = 'l'
+
+    client, collection = connect_to_mongodb(database_name, collection_name)
+    insert_documents(collection)
+    client.close()
+
+
+if __name__ == '__main__':
+    main()
