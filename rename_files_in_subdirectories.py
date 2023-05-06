@@ -1,6 +1,4 @@
 """
-rename_files_in_subdirectories.py
-
 This script renames the files in each subdirectory of the current directory, 
 by prefixing the file names with the directory name followed by an incrementing number.
 
