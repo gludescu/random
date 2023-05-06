@@ -1,6 +1,7 @@
 """
-This script renames the files in each subdirectory of the current directory, 
+This script renames the files in each subdirectory of the current directory,
 by prefixing the file names with the directory name followed by an incrementing number.
+The files are sorted alphabetically (case insensitive) before renaming.
 
 Usage:
 1. Save this script as 'rename_files_in_subdirectories.py' in the root directory containing
@@ -14,7 +15,7 @@ Assuming you have the following directory structure:
 
 root_directory/
 ├── 102/
-│   ├── file1.txt
+│   ├── File1.txt
 │   └── file2.txt
 ├── 103/
 │   ├── another_file.txt
@@ -40,6 +41,9 @@ import shutil
 def rename_files_in_directory(root_directory):
     for subdir, dirs, files in os.walk(root_directory):
         if subdir != root_directory:
+            # Sort files alphabetically (case insensitive)
+            files.sort(key=lambda s: s.lower())
+
             counter = 1
             for file in files:
                 old_filepath = os.path.join(subdir, file)
