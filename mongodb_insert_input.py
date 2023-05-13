@@ -26,10 +26,12 @@ To use the script:
 
 from pymongo import MongoClient
 from datetime import datetime
+from dotenv import load_dotenv
+import os
 
 
-def connect_to_mongodb(database_name, collection_name):
-    client = MongoClient('mongodb://localhost:27017/')
+def connect_to_mongodb(database_name, collection_name, mongo_uri):
+    client = MongoClient(mongo_uri)
     db = client[database_name]
     collection = db[collection_name]
     return client, collection
@@ -55,10 +57,14 @@ def insert_documents(collection):
 
 
 def main():
-    database_name = 'l'
-    collection_name = 'l'
+    load_dotenv()
 
-    client, collection = connect_to_mongodb(database_name, collection_name)
+    database_name = os.getenv('DATABASE_NAME')
+    collection_name = os.getenv('COLLECTION_NAME')
+    mongo_uri = os.getenv('MONGO_URI')
+
+    client, collection = connect_to_mongodb(
+        database_name, collection_name, mongo_uri)
     insert_documents(collection)
     client.close()
 
