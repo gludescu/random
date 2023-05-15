@@ -1,39 +1,3 @@
-"""
-This script renames the files in each subdirectory of the current directory,
-by prefixing the file names with the directory name followed by an incrementing number.
-The files are sorted alphabetically (case insensitive) before renaming.
-
-Usage:
-1. Save this script as 'rename_files_in_subdirectories.py' in the root directory containing
-   the subdirectories you want to process.
-2. Open a terminal (or command prompt) and navigate to the root directory where the script is saved.
-3. Run the script by entering the following command:
-   python rename_files_in_subdirectories.py
-
-Example:
-Assuming you have the following directory structure:
-
-root_directory/
-├── 102/
-│   ├── File1.txt
-│   └── file2.txt
-├── 103/
-│   ├── another_file.txt
-│   └── more_files.txt
-└── rename_files_in_subdirectories.py
-
-After running the script, the files will be renamed as follows:
-
-root_directory/
-├── 102/
-│   ├── 102 1.txt
-│   └── 102 2.txt
-├── 103/
-│   ├── 103 1.txt
-│   └── 103 2.txt
-└── rename_files_in_subdirectories.py
-"""
-
 import os
 import shutil
 

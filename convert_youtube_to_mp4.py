@@ -1,23 +1,3 @@
-"""
-This Python script uses the 'pytube' and 'moviepy' libraries to download a YouTube video in MP4 format. To use this script, follow the steps below:
-
-1. Install the 'pytube' and 'moviepy' libraries if you haven't already by running pip install pytube moviepy.
-2. Run the script. The script will prompt you to enter the YouTube video URL.
-3. Enter the URL of the YouTube video you want to download.
-4. The script will download the video in MP4 format and save it in the current working directory.
-5. After the download is complete, the script will print the path of the saved video file.
-
-Example:
-
-- Suppose you want to download a YouTube video with the URL 'https://youtu.be/dQw4w9WgXcQ'.
-- Run the script and enter 'https://youtu.be/dQw4w9WgXcQ' when prompted.
-- The script will download the video in MP4 format and save it in the current working directory.
-- After the download, the script will print the path of the saved video file, e.g., "/Users/username/Downloads/video_title.mp4".
-
-Please note that this script might not work for all YouTube videos, as some videos might have restrictions on downloading or might be blocked by YouTube's content protection systems.
-"""
-
-
 import os
 from pytube import YouTube
 from moviepy.editor import *

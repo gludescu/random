@@ -1,27 +1,3 @@
-"""
-This Python script extracts text from image files (using OCR) in the current working directory and saves the extracted text in a Word document (docx format).
-
-Dependencies:
-- pytesseract
-- PIL (Python Imaging Library)
-- python-docx
-
-How to use this code:
-
-1. Install the required dependencies:
-   pip install pytesseract Pillow python-docx
-2. Place the script in a directory containing the image files you want to extract text from.
-   Supported image formats: .jpg, .jpeg, .png, .bmp, .gif, .tiff
-3. Run the script using the command: python script_name.py
-4. The script will create a Word document (output.docx) containing the extracted text from the images.
-
-Code Explanation:
-
-- define get_image_files() to retrieve image files from the current working directory
-- define get_text_from_image() to extract text from an image using pytesseract
-- define create_docx_document() to save extracted text into a Word document
-"""
-
 import os
 import pytesseract
 from PIL import Image

@@ -1,29 +1,3 @@
-"""
-This Python script allows you to insert multiple documents into a MongoDB localhost database. Each document will contain user input as 'text' and the current date and time as 'timestamp'. The script uses a loop to continuously prompt the user for input until they choose to exit.
-
-To use the script:
-
-1. Ensure you have the pymongo library installed. If not, install it using the following command:
-   pip install pymongo
-
-2. Replace 'your_database_name' and 'your_collection_name' with the appropriate names for your MongoDB database and collection.
-
-3. Run the script. It will prompt you for input. Enter the text you want to store in the 'text' field.
-
-4. Press Enter to insert the document and continue entering more documents.
-
-5. To exit the loop and stop inserting documents, type 'e' and press Enter. The script will print a message indicating that all documents have been inserted successfully.
-
-6. The inserted documents will have the following structure:
-   {
-       "text": <your_input>,
-       "timestamp": <current_date_and_time>
-   }
-
-7. To insert more documents, simply run the script again and follow the prompts.
-"""
-
-
 from pymongo import MongoClient
 from datetime import datetime
 from dotenv import load_dotenv
