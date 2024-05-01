@@ -1,2 +1,2 @@
 # what dis?
-random python scripts
+random scripts
