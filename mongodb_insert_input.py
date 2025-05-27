@@ -1,6 +1,7 @@
 from pymongo import MongoClient
-from datetime import datetime
+from datetime import datetime, timezone
 from dotenv import load_dotenv
+from zoneinfo import ZoneInfo
 import os
 
 
@@ -14,20 +15,19 @@ def connect_to_mongodb(database_name, collection_name, mongo_uri):
 def create_document(input_data):
     doc = {
         'text': input_data,
-        'timestamp': datetime.utcnow()
+        'timestamp': datetime.now(ZoneInfo("Europe/Bucharest"))
     }
     return doc
 
 
 def insert_documents(collection):
     while True:
-        input_data = input("Enter the text, or type 'e' to exit:\n")
+        input_data = input()
         if input_data.lower() == 'e':
             break
 
         doc = create_document(input_data)
         collection.insert_one(doc)
-    print("All documents inserted successfully.")
 
 
 def main():
