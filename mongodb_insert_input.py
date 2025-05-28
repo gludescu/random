@@ -1,5 +1,5 @@
 from pymongo import MongoClient
-from datetime import datetime, timezone
+from datetime import datetime
 from dotenv import load_dotenv
 from zoneinfo import ZoneInfo
 import os
@@ -12,22 +12,47 @@ def connect_to_mongodb(database_name, collection_name, mongo_uri):
     return client, collection
 
 
-def create_document(input_data):
+# Include every new line in the same record.
+def create_document(inputs):
     doc = {
-        'text': input_data,
+        'text': "\n".join(inputs),
         'timestamp': datetime.now(ZoneInfo("Europe/Bucharest"))
     }
     return doc
 
 
 def insert_documents(collection):
+    inputs = []
     while True:
         input_data = input()
         if input_data.lower() == 'e':
             break
+        elif input_data.lower() == 'i':
+            if inputs:
+                doc = create_document(inputs)
+                collection.insert_one(doc)
+                inputs = []
+        else:
+            inputs.append(input_data)
 
-        doc = create_document(input_data)
-        collection.insert_one(doc)
+
+# Insert every line as a new record.
+# def create_document(input_data):
+#     doc = {
+#         'text': input_data,
+#         'timestamp': datetime.now(ZoneInfo("Europe/Bucharest"))
+#     }
+#     return doc
+
+
+# def insert_documents(collection):
+#     while True:
+#         input_data = input()
+#         if input_data.lower() == 'e':
+#             break
+#
+#         doc = create_document(input_data)
+#         collection.insert_one(doc)
 
 
 def main():
