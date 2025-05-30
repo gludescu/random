@@ -5,6 +5,7 @@ from cryptography.fernet import Fernet
 
 load_dotenv()
 
+
 class MongoDB:
     def __init__(self, mongo_srv):
         self.client = MongoClient(mongo_srv)
