@@ -1,14 +1,9 @@
-import base64
 import os
 from pymongo import MongoClient
 from dotenv import load_dotenv
 from cryptography.fernet import Fernet
 
 load_dotenv()
-
-def decrypt_base64(encoded_text, key):
-    decoded = base64.b64decode(encoded_text.encode())
-    return decoded[len(key):].decode()
 
 class MongoDB:
     def __init__(self, mongo_srv):
