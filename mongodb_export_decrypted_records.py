@@ -1,26 +1,23 @@
-import base64
 import os
 from pymongo import MongoClient
 from dotenv import load_dotenv
 from bson import json_util
+from cryptography.fernet import Fernet
 
 load_dotenv()
-KEY = os.getenv("ENCRYPTION_KEY").encode()
-MONGO_URI = os.getenv("MONGO_URI")
-DATABASE_NAME = os.getenv("DATABASE_NAME")
-COLLECTION_NAME = os.getenv("COLLECTION_NAME")
 
-def decrypt_base64(encoded_text, key):
-    decoded = base64.b64decode(encoded_text.encode())
-    return decoded[len(key):].decode()
+fernet = Fernet(os.getenv("ENCRYPTION_KEY"))
+mongo_uri = os.getenv("MONGO_URI")
+database_name = os.getenv("DATABASE_NAME")
+collection_name = os.getenv("COLLECTION_NAME")
 
-client = MongoClient(MONGO_URI)
-collection = client[DATABASE_NAME][COLLECTION_NAME]
+client = MongoClient(mongo_uri)
+collection = client[database_name][collection_name]
 
 output = []
 for doc in collection.find():
     try:
-        doc['text'] = decrypt_base64(doc['text'], KEY)
+        doc['text'] = fernet.decrypt(doc['text'].encode()).decode()
         output.append(doc)
     except:
         continue

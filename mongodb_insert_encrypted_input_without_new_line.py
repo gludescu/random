@@ -3,7 +3,7 @@ from datetime import datetime
 from dotenv import load_dotenv
 from zoneinfo import ZoneInfo
 import os
-import base64
+from cryptography.fernet import Fernet
 
 
 def connect_to_mongodb(database_name, collection_name, mongo_uri):
@@ -13,15 +13,9 @@ def connect_to_mongodb(database_name, collection_name, mongo_uri):
     return client, collection
 
 
-def encrypt_base64(text, key):
-    combined = key + text.encode()
-    encoded = base64.b64encode(combined).decode()
-    return encoded
-
-
 def create_document(input_data):
-    key = os.getenv("ENCRYPTION_KEY").encode()
-    encrypted_text = encrypt_base64(input_data, key)
+    fernet = Fernet(os.getenv("ENCRYPTION_KEY"))
+    encrypted_text = fernet.encrypt(input_data.encode()).decode()
     doc = {
         'text': encrypted_text,
         'timestamp': datetime.now(ZoneInfo("Europe/Bucharest"))

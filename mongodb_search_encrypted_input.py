@@ -2,9 +2,9 @@ import base64
 import os
 from pymongo import MongoClient
 from dotenv import load_dotenv
+from cryptography.fernet import Fernet
 
 load_dotenv()
-key = os.getenv("ENCRYPTION_KEY").encode()
 
 def decrypt_base64(encoded_text, key):
     decoded = base64.b64decode(encoded_text.encode())
@@ -20,9 +20,9 @@ class MongoDB:
         results = []
         for doc in collection.find():
             try:
-                decrypted_text = decrypt_base64(doc['text'], key)
-                if search_word.lower() in decrypted_text.lower():
-                    doc['text'] = decrypted_text
+                decrypted = fernet.decrypt(doc['text'].encode()).decode()
+                if search_word.lower() in decrypted.lower():
+                    doc['text'] = decrypted
                     results.append(doc)
             except:
                 continue
@@ -34,6 +34,7 @@ word = input("What to search? ")
 database_name = os.getenv('DATABASE_NAME')
 collection_name = os.getenv('COLLECTION_NAME')
 mongo_uri = os.getenv('MONGO_URI')
+fernet = Fernet(os.getenv("ENCRYPTION_KEY"))
 
 mongodb = MongoDB(mongo_uri)
 results = mongodb.search(database_name, collection_name, word)
