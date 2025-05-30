@@ -12,28 +12,22 @@ def connect_to_mongodb(database_name, collection_name, mongo_uri):
     return client, collection
 
 
-# Include every new line in the same record.
-def create_document(inputs):
+def create_document(input_data):
     doc = {
-        'text': "\n".join(inputs),
+        'text': input_data,
         'timestamp': datetime.now(ZoneInfo("Europe/Bucharest"))
     }
     return doc
 
 
 def insert_documents(collection):
-    inputs = []
     while True:
         input_data = input()
         if input_data.lower() == 'e':
             break
-        elif input_data.lower() == 'i':
-            if inputs:
-                doc = create_document(inputs)
-                collection.insert_one(doc)
-                inputs = []
-        else:
-            inputs.append(input_data)
+
+        doc = create_document(input_data)
+        collection.insert_one(doc)
 
 
 def main():

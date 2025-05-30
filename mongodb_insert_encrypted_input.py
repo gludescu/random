@@ -3,6 +3,7 @@ from datetime import datetime
 from dotenv import load_dotenv
 from zoneinfo import ZoneInfo
 import os
+import base64
 
 
 def connect_to_mongodb(database_name, collection_name, mongo_uri):
@@ -12,10 +13,18 @@ def connect_to_mongodb(database_name, collection_name, mongo_uri):
     return client, collection
 
 
-# Include every new line in the same record.
+def encrypt_base64(text, key):
+    combined = key + text.encode()
+    encoded = base64.b64encode(combined).decode()
+    return encoded
+
+
 def create_document(inputs):
+    key = os.getenv("ENCRYPTION_KEY").encode()
+    text = "\n".join(inputs)
+    encrypted_text = encrypt_base64(text, key)
     doc = {
-        'text': "\n".join(inputs),
+        'text': encrypted_text,
         'timestamp': datetime.now(ZoneInfo("Europe/Bucharest"))
     }
     return doc
